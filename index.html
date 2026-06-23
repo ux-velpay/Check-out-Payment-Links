@@ -113,7 +113,7 @@
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
           </div>
         </div>
-        <button class="btn btn-primary" onclick="openPanel()">
+        <button class="btn btn-primary" onclick="openProductPanel()">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:13px;height:13px;"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
           Crear producto
         </button>
@@ -528,6 +528,334 @@
 
 </div>
 
+<!-- ══════════════════════ ADD PRODUCT PANEL ══════════════════════ -->
+<div class="create-panel" id="addProductPanel">
+
+  <!-- Topbar con stepper -->
+  <div class="panel-topbar" style="justify-content:space-between;padding:0 24px;">
+    <div style="display:flex;align-items:center;gap:12px;">
+      <button class="close-btn" onclick="closeProductPanel()">✕</button>
+      <span style="font-size:14px;font-weight:500;color:#6B7280;">Agregar producto</span>
+    </div>
+    <!-- Stepper -->
+    <div id="prodStepper" style="display:flex;align-items:center;gap:6px;font-size:13px;">
+      <div class="step-item active" id="step-dot-1">
+        <span class="step-dot done">✓</span> Producto
+      </div>
+      <svg viewBox="0 0 24 24" fill="none" stroke="#D1D5DB" stroke-width="2" style="width:14px;height:14px;flex-shrink:0;"><polyline points="9 18 15 12 9 6"/></svg>
+      <div class="step-item" id="step-dot-2">
+        <span class="step-dot" id="sdot2">2</span> Apps
+      </div>
+      <svg viewBox="0 0 24 24" fill="none" stroke="#D1D5DB" stroke-width="2" style="width:14px;height:14px;flex-shrink:0;"><polyline points="9 18 15 12 9 6"/></svg>
+      <div class="step-item" id="step-dot-3">
+        <span class="step-dot" id="sdot3">3</span> Página
+      </div>
+    </div>
+    <div style="width:120px;display:flex;justify-content:flex-end;">
+      <button class="btn btn-primary" id="prodNextBtn" onclick="prodNext()" style="min-width:100px;">
+        Siguiente →
+      </button>
+    </div>
+  </div>
+
+  <!-- STEP 1: Producto -->
+  <div id="prod-step-1" style="display:flex;flex:1;padding-top:52px;overflow:hidden;">
+    <div class="panel-left" style="padding-bottom:32px;">
+      <div class="panel-form">
+
+        <div style="margin-bottom:6px;">
+          <p style="font-size:15px;font-weight:700;color:#1A1A2E;margin-bottom:2px;">Detalles del producto</p>
+          <p style="font-size:13px;color:#6B7280;">Describe tu oferta.</p>
+        </div>
+        <div style="height:1px;background:#E5E7EB;margin:16px 0;"></div>
+
+        <div class="form-section">
+          <label class="form-label">Nombre <span style="color:#EF4444;">*</span></label>
+          <div style="position:relative;">
+            <input class="form-input" id="pName" type="text" placeholder="Ej. Membresía Gold..." oninput="updateProdPreview()" maxlength="80"/>
+            <span style="position:absolute;right:10px;top:50%;transform:translateY(-50%);font-size:11px;color:#9CA3AF;" id="pNameCount">0 / 80</span>
+          </div>
+        </div>
+
+        <div class="form-section">
+          <label class="form-label">Titular</label>
+          <div style="position:relative;">
+            <input class="form-input" id="pHeadline" type="text" placeholder="Ej. Aprende finanzas desde cero..." oninput="updateProdPreview()" maxlength="80"/>
+            <span style="position:absolute;right:10px;top:50%;transform:translateY(-50%);font-size:11px;color:#9CA3AF;" id="pHlCount">0 / 80</span>
+          </div>
+        </div>
+
+        <div class="form-section">
+          <div class="toggle-row" style="padding:0;">
+            <div class="toggle-row-label" style="font-size:13.5px;">
+              Recopilar dirección de envío
+              <span style="display:inline-flex;align-items:center;justify-content:center;width:16px;height:16px;border-radius:50%;border:1px solid #D1D5DB;font-size:10px;color:#9CA3AF;margin-left:4px;cursor:help;" title="Solicita la dirección física del comprador">?</span>
+            </div>
+            <button class="toggle" id="shippingToggle" onclick="this.classList.toggle('on')"></button>
+          </div>
+        </div>
+
+        <!-- Pricing -->
+        <div style="margin:24px 0 6px;">
+          <p style="font-size:15px;font-weight:700;color:#1A1A2E;margin-bottom:2px;">Precio</p>
+          <p style="font-size:13px;color:#6B7280;">Elige cómo acceden a este producto.</p>
+        </div>
+        <div style="height:1px;background:#E5E7EB;margin:12px 0 16px;"></div>
+
+        <div style="display:flex;gap:10px;margin-bottom:16px;">
+          <div class="access-option" id="priceFree" onclick="setAccess('free')" style="flex:1;padding:12px 16px;border:2px solid #E5E7EB;border-radius:10px;cursor:pointer;display:flex;align-items:center;gap:10px;transition:all 0.15s;">
+            <div class="access-radio" id="radio-free" style="width:18px;height:18px;border-radius:50%;border:2px solid #D1D5DB;display:flex;align-items:center;justify-content:center;flex-shrink:0;"></div>
+            <div>
+              <div style="font-size:13.5px;font-weight:600;">🌐 Acceso gratuito</div>
+            </div>
+          </div>
+          <div class="access-option" id="pricePaid" onclick="setAccess('paid')" style="flex:1;padding:12px 16px;border:2px solid #3D1F8F;border-radius:10px;cursor:pointer;display:flex;align-items:center;gap:10px;transition:all 0.15s;">
+            <div class="access-radio" id="radio-paid" style="width:18px;height:18px;border-radius:50%;border:2px solid #3D1F8F;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+              <div style="width:10px;height:10px;border-radius:50%;background:#3D1F8F;"></div>
+            </div>
+            <div>
+              <div style="font-size:13.5px;font-weight:600;">💰 Acceso de pago</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Paid config -->
+        <div id="paidConfig" style="border:1px solid #E5E7EB;border-radius:10px;padding:16px;margin-bottom:16px;">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
+            <span id="priceSummary" style="font-size:14px;font-weight:700;color:#1A1A2E;">$0.00 / mes</span>
+            <button style="width:22px;height:22px;border-radius:50%;background:#FEE2E2;border:none;color:#EF4444;font-size:14px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;line-height:1;">×</button>
+          </div>
+
+          <select class="form-select" id="payPeriodType" onchange="updateProdPreview()" style="margin-bottom:10px;">
+            <option value="recurring">Recurrente</option>
+            <option value="once">Único</option>
+          </select>
+
+          <div style="display:flex;gap:8px;margin-bottom:10px;">
+            <div class="amount-input-group" style="flex:1;">
+              <span class="amount-prefix">$</span>
+              <input type="number" id="pAmount" placeholder="0.00" oninput="updateProdPreview()" style="flex:1;padding:10px 12px;border:none;outline:none;font-size:15px;font-weight:600;font-family:inherit;"/>
+            </div>
+            <select class="form-select" id="payPeriod" onchange="updateProdPreview()" style="width:110px;">
+              <option>1 mes</option>
+              <option>15 días</option>
+              <option>1 año</option>
+              <option>1 semana</option>
+            </select>
+            <select class="currency-select" onchange="updateProdPreview()">
+              <option>MXN</option>
+              <option>USD</option>
+            </select>
+          </div>
+
+          <div style="display:flex;gap:6px;margin-bottom:14px;">
+            <button class="quick-btn" onclick="setPAmount(19.99)">$19.99</button>
+            <button class="quick-btn" onclick="setPAmount(39.99)">$39.99</button>
+            <button class="quick-btn" onclick="setPAmount(79.99)">$79.99</button>
+          </div>
+
+          <div class="toggle-row" style="padding:10px 0;">
+            <div class="toggle-row-label" style="font-size:13px;gap:6px;">
+              🎁 Incluir prueba gratuita
+              <span style="background:#DCFCE7;color:#16A34A;font-size:11px;font-weight:600;padding:2px 8px;border-radius:20px;">Recomendado</span>
+            </div>
+            <button class="toggle" onclick="this.classList.toggle('on')"></button>
+          </div>
+
+          <div class="toggle-row" style="padding:10px 0;">
+            <div class="toggle-row-label" style="font-size:13px;">🌐 Aceptar pagos en moneda local</div>
+            <button class="toggle" onclick="this.classList.toggle('on')"></button>
+          </div>
+          <div class="toggle-row" style="padding:10px 0;border-bottom:none;">
+            <div class="toggle-row-label" style="font-size:13px;">💳 Personalizar métodos de pago</div>
+            <button class="toggle" onclick="this.classList.toggle('on')"></button>
+          </div>
+        </div>
+
+        <button style="display:flex;align-items:center;gap:6px;background:none;border:none;color:#3D1F8F;font-size:13.5px;font-weight:600;cursor:pointer;padding:4px 0;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:14px;height:14px;"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          Agregar opción de precio
+        </button>
+
+        <!-- Product settings -->
+        <div style="margin-top:24px;">
+          <button onclick="this.nextElementSibling.style.display = this.nextElementSibling.style.display==='none'?'block':'none'" style="width:100%;display:flex;justify-content:space-between;align-items:center;background:none;border:none;padding:12px 0;font-size:14px;font-weight:600;cursor:pointer;border-top:1px solid #E5E7EB;">
+            Configuración del producto
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:16px;height:16px;"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div style="display:none;padding-bottom:16px;">
+            <label class="form-label" style="font-size:12.5px;">URL personalizada</label>
+            <input class="form-input" placeholder="velpay.mx/p/mi-producto" style="margin-bottom:12px;"/>
+            <div class="toggle-row" style="padding:8px 0;">
+              <div class="toggle-row-label" style="font-size:13px;">Ocultar de la tienda</div>
+              <button class="toggle" onclick="this.classList.toggle('on')"></button>
+            </div>
+            <div class="toggle-row" style="padding:8px 0;">
+              <div class="toggle-row-label" style="font-size:13px;">Preguntas antes del checkout</div>
+              <button class="toggle" onclick="this.classList.toggle('on')"></button>
+            </div>
+            <div class="toggle-row" style="padding:8px 0;border-bottom:none;">
+              <div class="toggle-row-label" style="font-size:13px;">Acceso con fecha de expiración</div>
+              <button class="toggle" onclick="this.classList.toggle('on')"></button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Preview -->
+    <div class="panel-right">
+      <div style="text-align:center;margin-bottom:16px;font-size:12px;color:#6B7280;font-weight:500;text-transform:uppercase;letter-spacing:0.5px;">Vista previa del producto</div>
+      <div style="width:240px;background:white;border-radius:16px;box-shadow:0 8px 32px rgba(61,31,143,0.15);overflow:hidden;">
+        <div style="height:130px;background:#F3F4F6;display:flex;align-items:center;justify-content:center;color:#9CA3AF;font-size:13px;flex-direction:column;gap:6px;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="width:28px;height:28px;opacity:0.4;"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+          <span style="font-size:11.5px;">Imagen de banner</span>
+        </div>
+        <div style="padding:16px;">
+          <div style="font-size:15px;font-weight:700;color:#1A1A2E;margin-bottom:6px;" id="pPrevTitle">Título</div>
+          <div style="font-size:13px;color:#6B7280;margin-bottom:12px;" id="pPrevPrice">$29.99 / mes</div>
+          <button id="pPrevBtn" style="width:100%;padding:10px;background:#3D1F8F;color:white;border:none;border-radius:8px;font-size:13.5px;font-weight:600;cursor:pointer;">Unirse ahora</button>
+          <div style="text-align:center;margin-top:10px;font-size:11px;color:#9CA3AF;">Desarrollado por Velpay</div>
+        </div>
+      </div>
+      <div class="preview-device-toggle">
+        <button class="device-btn active"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12" y2="18"/></svg></button>
+        <button class="device-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></button>
+      </div>
+    </div>
+  </div>
+
+  <!-- STEP 2: Apps -->
+  <div id="prod-step-2" style="display:none;flex:1;padding-top:52px;overflow:hidden;">
+    <div class="panel-left" style="padding-bottom:32px;">
+      <div class="panel-form">
+        <p style="font-size:15px;font-weight:700;margin-bottom:4px;">Apps incluidas</p>
+        <p style="font-size:13px;color:#6B7280;margin-bottom:20px;">Elige las apps que incluye este producto.</p>
+
+        <!-- Included -->
+        <div style="margin-bottom:8px;">
+          <div class="toggle-row" style="padding:12px 0;">
+            <div class="toggle-row-label" style="font-size:13.5px;font-weight:500;">
+              <span style="width:26px;height:26px;background:#DBEAFE;border-radius:6px;display:inline-flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#1D4ED8;">C</span>
+              Cursos
+            </div>
+            <button class="toggle on" onclick="this.classList.toggle('on');updateAppsPreview()"></button>
+          </div>
+          <div style="height:1px;background:#E5E7EB;"></div>
+        </div>
+
+        <p style="font-size:12px;font-weight:600;color:#9CA3AF;text-transform:uppercase;letter-spacing:0.5px;margin:16px 0 10px;">Inicio</p>
+
+        <div class="toggle-row" style="padding:12px 0;">
+          <div class="toggle-row-label" style="font-size:13.5px;">
+            <span style="width:26px;height:26px;background:#EDE9FE;border-radius:6px;display:inline-flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#7C3AED;">F</span>
+            Foro público
+          </div>
+          <button class="toggle" onclick="this.classList.toggle('on');updateAppsPreview()"></button>
+        </div>
+
+        <div style="height:1px;background:#E5E7EB;margin:8px 0 20px;"></div>
+
+        <p style="font-size:13.5px;font-weight:600;color:#1A1A2E;margin-bottom:12px;">Agregar nueva app</p>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+          <button class="app-add-btn" onclick="addApp(this, 'Foros')">
+            <span style="width:22px;height:22px;background:#FEF3C7;border-radius:5px;display:inline-flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:#B45309;">F</span>
+            Foros
+            <span style="margin-left:auto;font-size:16px;color:#6B7280;">+</span>
+          </button>
+          <button class="app-add-btn" onclick="addApp(this, 'Chat')">
+            <span style="width:22px;height:22px;background:#DBEAFE;border-radius:5px;display:inline-flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:#1D4ED8;">C</span>
+            Chat
+            <span style="margin-left:auto;font-size:16px;color:#6B7280;">+</span>
+          </button>
+          <button class="app-add-btn" onclick="addApp(this, 'Contenido')">
+            <span style="width:22px;height:22px;background:#DBEAFE;border-radius:5px;display:inline-flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:#1D4ED8;">C</span>
+            Contenido
+            <span style="margin-left:auto;font-size:16px;color:#6B7280;">+</span>
+          </button>
+          <button class="app-add-btn" onclick="addApp(this, 'Livestreaming')">
+            <span style="width:22px;height:22px;background:#FCE7F3;border-radius:5px;display:inline-flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:#BE185D;">L</span>
+            Livestreaming
+            <span style="margin-left:auto;font-size:16px;color:#6B7280;">+</span>
+          </button>
+          <button class="app-add-btn" onclick="addApp(this, 'Eventos')">
+            <span style="width:22px;height:22px;background:#ECFDF5;border-radius:5px;display:inline-flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:#065F46;">E</span>
+            Eventos
+            <span style="margin-left:auto;font-size:16px;color:#6B7280;">+</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Apps Preview -->
+    <div class="panel-right">
+      <div style="text-align:center;margin-bottom:16px;font-size:12px;color:#6B7280;font-weight:500;text-transform:uppercase;letter-spacing:0.5px;">Vista previa del miembro</div>
+      <div style="width:240px;background:white;border-radius:16px;box-shadow:0 8px 32px rgba(61,31,143,0.15);overflow:hidden;min-height:200px;">
+        <div style="padding:16px;border-bottom:1px solid #E5E7EB;">
+          <div style="font-size:13.5px;font-weight:600;color:#1A1A2E;" id="appPreviewTitle">Cursos</div>
+        </div>
+        <div id="appPreviewList" style="padding:12px 16px;display:flex;flex-direction:column;gap:8px;">
+          <div style="font-size:13px;color:#6B7280;padding:8px;background:#F9FAFB;border-radius:8px;">
+            <span style="font-weight:600;color:#1A1A2E;">C</span> Cursos
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- STEP 3: Página -->
+  <div id="prod-step-3" style="display:none;flex:1;padding-top:52px;overflow:hidden;">
+    <div class="panel-left" style="padding-bottom:32px;">
+      <div class="panel-form">
+
+        <!-- Media upload -->
+        <div style="height:180px;border:2px dashed #E5E7EB;border-radius:12px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;color:#9CA3AF;cursor:pointer;margin-bottom:20px;transition:all 0.15s;" onmouseenter="this.style.borderColor='#9270E8';this.style.background='#FAF7FF'" onmouseleave="this.style.borderColor='#E5E7EB';this.style.background='transparent'">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="width:32px;height:32px;opacity:0.5;"><path d="M15 10l-4 4-4-4"/><path d="M19 21H5a2 2 0 01-2-2V5a2 2 0 012-2h11l5 5v11a2 2 0 01-2 2z"/></svg>
+          <span style="font-size:14px;font-weight:600;color:#6B7280;">Agregar video o foto</span>
+          <span style="font-size:12px;">Las páginas con video convierten 4x mejor</span>
+        </div>
+
+        <!-- Título -->
+        <div style="margin-bottom:16px;">
+          <input style="width:100%;font-size:22px;font-weight:700;border:none;outline:none;color:#1A1A2E;font-family:inherit;padding:4px 0;" id="pageTitle" placeholder="Nombre del producto" oninput="updatePagePreview()"/>
+        </div>
+
+        <!-- Descripción -->
+        <div style="margin-bottom:16px;">
+          <textarea style="width:100%;border:none;outline:none;font-size:14px;color:#6B7280;font-family:inherit;min-height:80px;resize:none;" id="pageDesc" placeholder="Escribe una descripción..." oninput="updatePagePreview()"></textarea>
+        </div>
+
+        <!-- FAQ -->
+        <div style="border-top:1px solid #E5E7EB;padding-top:16px;">
+          <button onclick="addFAQ()" style="width:100%;display:flex;align-items:center;justify-content:space-between;background:none;border:none;font-size:13.5px;font-weight:600;color:#6B7280;cursor:pointer;padding:0;">
+            Agregar FAQ
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:16px;height:16px;"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          </button>
+          <div id="faqList" style="margin-top:12px;display:flex;flex-direction:column;gap:8px;"></div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Page Preview -->
+    <div class="panel-right">
+      <div style="text-align:center;margin-bottom:16px;font-size:12px;color:#6B7280;font-weight:500;text-transform:uppercase;letter-spacing:0.5px;">Vista previa de la página</div>
+      <div style="width:260px;background:white;border-radius:16px;box-shadow:0 8px 32px rgba(61,31,143,0.15);overflow:hidden;">
+        <div style="height:120px;background:#F3F4F6;display:flex;align-items:center;justify-content:center;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#D1D5DB" stroke-width="1.5" style="width:32px;height:32px;"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+        </div>
+        <div style="padding:16px;">
+          <div style="font-size:15px;font-weight:700;color:#1A1A2E;margin-bottom:4px;" id="pagePrevTitle">Nombre del producto</div>
+          <div style="font-size:12.5px;color:#6B7280;margin-bottom:12px;" id="pagePrevDesc">Descripción...</div>
+          <button style="width:100%;padding:10px;background:#3D1F8F;color:white;border:none;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;">Unirse ahora</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
 <!-- TOAST -->
 <div class="toast" id="toast">
   <span class="toast-icon">✓</span>
@@ -602,6 +930,159 @@
   function createLink() {
     closePanel();
     showToast('¡Liga de pago creada exitosamente!');
+  }
+
+  // ── PRODUCT PANEL ──
+  let prodStep = 1;
+  let accessType = 'paid';
+
+  function openProductPanel() {
+    prodStep = 1;
+    showProdStep(1);
+    document.getElementById('addProductPanel').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeProductPanel() {
+    document.getElementById('addProductPanel').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  function showProdStep(n) {
+    [1,2,3].forEach(i => {
+      const el = document.getElementById('prod-step-' + i);
+      if (el) el.style.display = i === n ? 'flex' : 'none';
+    });
+    updateStepper(n);
+    const btn = document.getElementById('prodNextBtn');
+    if (n === 3) {
+      btn.textContent = '✓ Guardar producto';
+      btn.onclick = saveProduct;
+    } else {
+      btn.innerHTML = 'Siguiente →';
+      btn.onclick = prodNext;
+    }
+  }
+
+  function updateStepper(n) {
+    const labels = ['Producto', 'Apps', 'Página'];
+    [1,2,3].forEach(i => {
+      const dot = document.getElementById('sdot' + i) || document.querySelector('#step-dot-' + i + ' .step-dot');
+      const item = document.getElementById('step-dot-' + i);
+      if (!item) return;
+      const dotEl = item.querySelector('.step-dot');
+      if (!dotEl) return;
+      dotEl.classList.remove('done', 'active-dot');
+      item.classList.remove('active');
+      if (i < n) {
+        dotEl.textContent = '✓';
+        dotEl.classList.add('done');
+      } else if (i === n) {
+        dotEl.textContent = i;
+        dotEl.classList.add('active-dot');
+        item.classList.add('active');
+      } else {
+        dotEl.textContent = i;
+      }
+    });
+  }
+
+  function prodNext() {
+    if (prodStep < 3) {
+      prodStep++;
+      showProdStep(prodStep);
+    }
+  }
+
+  function saveProduct() {
+    closeProductPanel();
+    showToast('¡Producto creado exitosamente!');
+  }
+
+  function setAccess(type) {
+    accessType = type;
+    const free = document.getElementById('priceFree');
+    const paid = document.getElementById('pricePaid');
+    const config = document.getElementById('paidConfig');
+    const rFree = document.getElementById('radio-free');
+    const rPaid = document.getElementById('radio-paid');
+    if (type === 'free') {
+      free.style.borderColor = '#3D1F8F';
+      paid.style.borderColor = '#E5E7EB';
+      rFree.innerHTML = '<div style="width:10px;height:10px;border-radius:50%;background:#3D1F8F;"></div>';
+      rFree.style.borderColor = '#3D1F8F';
+      rPaid.innerHTML = '';
+      rPaid.style.borderColor = '#D1D5DB';
+      config.style.display = 'none';
+      document.getElementById('pPrevBtn').textContent = 'Unirse gratis';
+    } else {
+      paid.style.borderColor = '#3D1F8F';
+      free.style.borderColor = '#E5E7EB';
+      rPaid.innerHTML = '<div style="width:10px;height:10px;border-radius:50%;background:#3D1F8F;"></div>';
+      rPaid.style.borderColor = '#3D1F8F';
+      rFree.innerHTML = '';
+      rFree.style.borderColor = '#D1D5DB';
+      config.style.display = 'block';
+      document.getElementById('pPrevBtn').textContent = 'Unirse ahora';
+    }
+    updateProdPreview();
+  }
+
+  function updateProdPreview() {
+    const name = document.getElementById('pName').value || 'Título';
+    const amount = parseFloat(document.getElementById('pAmount').value) || 0;
+    const period = document.getElementById('payPeriod').value || '1 mes';
+    document.getElementById('pNameCount').textContent = document.getElementById('pName').value.length + ' / 80';
+    document.getElementById('pHlCount').textContent = document.getElementById('pHeadline').value.length + ' / 80';
+    document.getElementById('pPrevTitle').textContent = name;
+    if (accessType === 'free') {
+      document.getElementById('pPrevPrice').textContent = 'Gratis';
+      document.getElementById('priceSummary').textContent = 'Gratis';
+    } else {
+      const priceStr = amount > 0 ? `$${amount.toFixed(2)} / ${period}` : '$0.00 / mes';
+      document.getElementById('pPrevPrice').textContent = priceStr;
+      document.getElementById('priceSummary').textContent = priceStr;
+    }
+  }
+
+  function setPAmount(val) {
+    document.getElementById('pAmount').value = val;
+    updateProdPreview();
+  }
+
+  function updateAppsPreview() {
+    // minimal — just shows Cursos always
+  }
+
+  function addApp(btn, name) {
+    btn.classList.toggle('added');
+    const plus = btn.querySelector('span:last-child');
+    if (btn.classList.contains('added')) {
+      plus.textContent = '✓';
+      plus.style.color = '#3D1F8F';
+    } else {
+      plus.textContent = '+';
+      plus.style.color = '#6B7280';
+    }
+  }
+
+  function updatePagePreview() {
+    const t = document.getElementById('pageTitle').value || 'Nombre del producto';
+    const d = document.getElementById('pageDesc').value || 'Descripción...';
+    document.getElementById('pagePrevTitle').textContent = t;
+    document.getElementById('pagePrevDesc').textContent = d.slice(0, 80);
+  }
+
+  let faqCount = 0;
+  function addFAQ() {
+    faqCount++;
+    const div = document.createElement('div');
+    div.style.cssText = 'border:1px solid #E5E7EB;border-radius:8px;overflow:hidden;';
+    div.innerHTML = `
+      <input placeholder="Pregunta ${faqCount}..." style="width:100%;padding:10px 12px;border:none;outline:none;font-size:13.5px;font-weight:600;font-family:inherit;border-bottom:1px solid #E5E7EB;"/>
+      <textarea placeholder="Respuesta..." style="width:100%;padding:10px 12px;border:none;outline:none;font-size:13px;font-family:inherit;min-height:60px;resize:none;"></textarea>
+    `;
+    document.getElementById('faqList').appendChild(div);
   }
 
   // ── TOAST ──

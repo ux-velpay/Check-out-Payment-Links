@@ -1094,6 +1094,76 @@ tbody td {
   margin-top: 36px;
 }
 
+/* ── STEPPER ── */
+.step-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-muted);
+}
+
+.step-item.active {
+  color: var(--text);
+  font-weight: 600;
+}
+
+.step-dot {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border: 2px solid var(--border);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--text-muted);
+  background: var(--white);
+  flex-shrink: 0;
+}
+
+.step-dot.done {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: var(--white);
+  font-size: 12px;
+}
+
+.step-dot.active-dot {
+  border-color: var(--primary);
+  color: var(--primary);
+}
+
+/* ── APP ADD BTN ── */
+.app-add-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--white);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text);
+  cursor: pointer;
+  transition: all 0.15s;
+  text-align: left;
+}
+
+.app-add-btn:hover {
+  border-color: var(--primary-mid);
+  background: var(--primary-light);
+}
+
+.app-add-btn.added {
+  border-color: var(--primary);
+  background: var(--primary-light);
+  color: var(--primary);
+}
+
 /* ── LINK COPY ── */
 .link-cell {
   display: flex;
