@@ -497,58 +497,41 @@
   <!-- RIGHT: Preview -->
   <div class="panel-right">
 
-    <!-- iPhone 14 Pro mockup -->
+    <!-- iPhone real PNG como frame -->
     <div class="iphone-wrap">
-
-      <!-- Botón silencio -->
-      <div class="iphone-btn-mute"></div>
-      <!-- Botones volumen -->
-      <div class="iphone-btn-vol1"></div>
-      <div class="iphone-btn-vol2"></div>
-      <!-- Botón power -->
-      <div class="iphone-btn-power"></div>
-
-      <!-- Cuerpo del teléfono -->
-      <div class="iphone-body">
-        <!-- Pantalla -->
-        <div class="iphone-screen">
-          <!-- Dynamic Island -->
-          <div class="dynamic-island">
-            <div class="di-dot"></div>
+      <!-- Checkout content detrás del PNG (la pantalla es transparente) -->
+      <div class="iphone-screen-overlay">
+        <div class="phone-content">
+          <div class="preview-merchant">
+            <div class="merchant-avatar">V</div>
+            <span class="merchant-name">Velpay</span>
           </div>
-
-          <!-- Contenido del checkout -->
-          <div class="phone-content">
-            <div class="preview-merchant">
-              <div class="merchant-avatar">V</div>
-              <span class="merchant-name">Velpay</span>
+          <p class="preview-desc" id="previewDesc">Descripción del producto</p>
+          <p class="preview-product-name" id="previewProduct">Nombre de liga</p>
+          <p class="preview-price" id="previewPrice">$0.00</p>
+          <button class="preview-promo">Agregar código de descuento</button>
+          <hr class="preview-divider"/>
+          <div class="preview-total-row">
+            <span>Total a pagar hoy</span>
+            <span id="previewTotal">$0.00</span>
+          </div>
+          <p class="preview-field-label">Email</p>
+          <input class="preview-input" placeholder="correo@ejemplo.com" readonly/>
+          <p class="preview-method-label">Método de pago</p>
+          <div class="preview-method">
+            <div class="preview-method-left">
+              <div class="preview-radio"><div class="preview-radio-inner"></div></div>
+              <span style="font-size:12.5px;">Tarjeta</span>
             </div>
-            <p class="preview-desc" id="previewDesc">Descripción del producto</p>
-            <p class="preview-product-name" id="previewProduct">Nombre de liga</p>
-            <p class="preview-price" id="previewPrice">$0.00</p>
-            <button class="preview-promo">Agregar código de descuento</button>
-            <hr class="preview-divider"/>
-            <div class="preview-total-row">
-              <span>Total a pagar hoy</span>
-              <span id="previewTotal">$0.00</span>
-            </div>
-            <p class="preview-field-label">Email</p>
-            <input class="preview-input" placeholder="correo@ejemplo.com" readonly/>
-            <p class="preview-method-label">Método de pago</p>
-            <div class="preview-method">
-              <div class="preview-method-left">
-                <div class="preview-radio"><div class="preview-radio-inner"></div></div>
-                <span style="font-size:12.5px;">Tarjeta</span>
-              </div>
-              <div class="card-logos">
-                <div class="card-logo visa">VISA</div>
-                <div class="card-logo mc" style="font-size:7px;">MC</div>
-              </div>
+            <div class="card-logos">
+              <div class="card-logo visa">VISA</div>
+              <div class="card-logo mc" style="font-size:7px;">MC</div>
             </div>
           </div>
-
-        </div><!-- /iphone-screen -->
-      </div><!-- /iphone-body -->
+        </div>
+      </div>
+      <!-- Frame PNG encima — la pantalla es transparente, el contenido asoma -->
+      <img src="iphone.png" class="iphone-img" alt="iPhone frame"/>
     </div><!-- /iphone-wrap -->
 
     <div class="preview-device-toggle">

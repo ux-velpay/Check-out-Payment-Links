@@ -854,117 +854,42 @@ tbody td {
   height: 18px;
 }
 
-/* ── iPHONE 14 PRO MOCKUP ── */
+/* ── iPHONE REAL PNG MOCKUP ── */
+/* Imagen: 840×1704px. Pantalla: x=47-793, y=41-1662 (transparente) */
 .iphone-wrap {
   position: relative;
-  width: 248px;
-  height: 506px;
+  width: 270px;
   flex-shrink: 0;
 }
 
-/* Cuerpo principal */
-.iphone-body {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(145deg, #2C2440 0%, #1A1330 40%, #211838 100%);
-  border-radius: 46px;
-  box-shadow:
-    inset 0 0 0 1px rgba(255,255,255,0.12),
-    inset 0 0 0 2px rgba(0,0,0,0.6),
-    0 0 0 1px #0D0A1A,
-    0 30px 80px rgba(0,0,0,0.55),
-    0 8px 24px rgba(0,0,0,0.4);
+/* El PNG del frame encima de todo */
+.iphone-img {
+  width: 100%;
+  display: block;
+  position: relative;
+  z-index: 2;
+  pointer-events: none;
+  user-select: none;
 }
 
-/* Pantalla */
-.iphone-screen {
+/* Overlay posicionado exactamente sobre la pantalla transparente */
+/* left: 47/840=5.6%  top: 41/1704=2.4%  width: 746/840=88.8%  height: 1621/1704=95.1% */
+.iphone-screen-overlay {
   position: absolute;
-  top: 7px;
-  left: 7px;
-  right: 7px;
-  bottom: 7px;
-  background: #ffffff;
-  border-radius: 40px;
+  top: 2.4%;
+  left: 5.6%;
+  width: 88.8%;
+  height: 95.1%;
+  z-index: 1;
+  background: #fff;
+  border-radius: 13%;
   overflow: hidden;
 }
 
-/* Dynamic Island */
-.dynamic-island {
-  position: absolute;
-  top: 10px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 88px;
-  height: 24px;
-  background: #000;
-  border-radius: 20px;
-  z-index: 10;
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  padding-right: 7px;
-  box-shadow: 0 0 0 1.5px rgba(255,255,255,0.06);
-}
-
-.di-dot {
-  width: 9px;
-  height: 9px;
-  border-radius: 50%;
-  background: #0D0D12;
-  border: 1px solid #1A1A2E;
-  box-shadow: inset 0 0 3px rgba(100,160,255,0.3);
-}
-
-/* Botón silencio (izquierda, arriba) */
-.iphone-btn-mute {
-  position: absolute;
-  left: -3px;
-  top: 88px;
-  width: 3px;
-  height: 26px;
-  background: linear-gradient(to right, #1A1330, #2C2440);
-  border-radius: 2px 0 0 2px;
-  box-shadow: -1px 0 0 rgba(255,255,255,0.08);
-}
-
-/* Botones volumen (izquierda) */
-.iphone-btn-vol1 {
-  position: absolute;
-  left: -3px;
-  top: 130px;
-  width: 3px;
-  height: 52px;
-  background: linear-gradient(to right, #1A1330, #2C2440);
-  border-radius: 2px 0 0 2px;
-  box-shadow: -1px 0 0 rgba(255,255,255,0.08);
-}
-
-.iphone-btn-vol2 {
-  position: absolute;
-  left: -3px;
-  top: 194px;
-  width: 3px;
-  height: 52px;
-  background: linear-gradient(to right, #1A1330, #2C2440);
-  border-radius: 2px 0 0 2px;
-  box-shadow: -1px 0 0 rgba(255,255,255,0.08);
-}
-
-/* Botón power (derecha) */
-.iphone-btn-power {
-  position: absolute;
-  right: -3px;
-  top: 148px;
-  width: 3px;
-  height: 68px;
-  background: linear-gradient(to left, #1A1330, #2C2440);
-  border-radius: 0 2px 2px 0;
-  box-shadow: 1px 0 0 rgba(255,255,255,0.08);
-}
-
-/* Contenido scroll dentro de la pantalla */
+/* Contenido scroll — padding-top para dejar espacio al Dynamic Island */
+/* DI ocupa hasta y=129 → dentro de overlay: (129-41)/1621 = 5.4% */
 .phone-content {
-  padding: 50px 14px 16px;
+  padding: 8% 14px 16px;
   overflow-y: auto;
   height: 100%;
   box-sizing: border-box;
