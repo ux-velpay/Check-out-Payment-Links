@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Velpay – Ligas de pago</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+<!-- ══════════════════════ SIDEBAR ══════════════════════ -->
+<aside class="sidebar">
+  <div class="sidebar-logo">
+    <a class="logo-wrap" href="#">
+      <svg class="logo-icon" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M16 3L4 10.5V21.5L16 29L28 21.5V10.5L16 3Z" fill="#3D1F8F" opacity="0.15"/>
+        <path d="M16 3L10 10.5L16 14L22 10.5L16 3Z" fill="#3D1F8F"/>
+        <path d="M4 10.5L10 14V21.5L4 18V10.5Z" fill="#6C47D4"/>
+        <path d="M28 10.5L22 14V21.5L28 18V10.5Z" fill="#3D1F8F"/>
+        <path d="M10 21.5L16 25L22 21.5V14L16 17.5L10 14V21.5Z" fill="#9270E8"/>
+      </svg>
+      <span class="logo-text">Velpay<sup style="font-size:9px;font-weight:400;color:#9CA3AF">®</sup></span>
+    </a>
+  </div>
+
+  <nav class="sidebar-nav">
+    <a class="nav-item" href="#">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+      Dashboard
+    </a>
+
+    <div class="nav-item" style="justify-content:space-between;cursor:default;">
+      <div style="display:flex;align-items:center;gap:10px;">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:16px;height:16px;"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+        Ventas
+      </div>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:14px;height:14px;"><polyline points="6 9 12 15 18 9"/></svg>
+    </div>
+    <a class="nav-item nav-sub" href="#">Transacciones</a>
+    <a class="nav-item nav-sub active" href="#">Ligas de pago</a>
+
+    <a class="nav-item" href="#">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+      Reportes
+    </a>
+    <a class="nav-item" href="#">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+      Sucursales
+    </a>
+    <a class="nav-item" href="#">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+      Usuarios
+    </a>
+    <a class="nav-item" href="#">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.24 12.24a6 6 0 00-8.49-8.49L5 10.5V19h8.5z"/><line x1="16" y1="8" x2="2" y2="22"/><line x1="17.5" y1="15" x2="9" y2="15"/></svg>
+      Plugins
+    </a>
+
+    <div class="nav-item" style="justify-content:space-between;cursor:default;">
+      <div style="display:flex;align-items:center;gap:10px;">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:16px;height:16px;"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+        Perfil
+      </div>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:14px;height:14px;"><polyline points="18 15 12 9 6 15"/></svg>
+    </div>
+
+    <a class="nav-item" href="#">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+      Desarrolladores
+    </a>
+  </nav>
+
+  <div class="sidebar-bottom">
+    <a class="logout-btn" href="#">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:16px;height:16px;"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+      Cerrar sesión
+    </a>
+  </div>
+</aside>
+
+<!-- ══════════════════════ MAIN ══════════════════════ -->
+<div class="main">
+
+  <!-- TOPBAR -->
+  <header class="topbar">
+    <div class="breadcrumb">Ventas/ <span>Ligas de pago</span></div>
+    <div class="topbar-right">
+      <button class="btn btn-primary" onclick="openPanel()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:14px;height:14px;"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        Crear liga de pago
+      </button>
+    </div>
+  </header>
+
+  <!-- CONTENT -->
+  <main class="content">
+
+    <!-- TABS -->
+    <div class="tabs">
+      <div class="tab active" onclick="switchTab('productos', this)">Productos</div>
+      <div class="tab" onclick="switchTab('ligas', this)">Ligas de pago</div>
+    </div>
+
+    <!-- ── PRODUCTOS TAB ── -->
+    <div id="tab-productos">
+
+      <div class="table-toolbar">
+        <div class="toolbar-left">
+          <div class="filter-chip">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+            Visibilidad
+            <span class="chip-value">Visible, Oculto</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+          </div>
+        </div>
+        <button class="btn btn-primary" onclick="openPanel()">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:13px;height:13px;"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          Crear producto
+        </button>
+      </div>
+
+      <div class="table-card">
+        <table>
+          <thead>
+            <tr>
+              <th>Nombre</th>
+              <th>Precio</th>
+              <th>Visibilidad</th>
+              <th>Estado de descubrimiento</th>
+              <th>Conversión checkout
+                <span class="sort-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:12px;height:12px;"><line x1="12" y1="5" x2="12" y2="19"/><polyline points="19 12 12 19 5 12"/></svg>
+                </span>
+              </th>
+              <th>Revenue total</th>
+              <th>Activos
+                <span class="sort-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:12px;height:12px;"><line x1="12" y1="5" x2="12" y2="19"/><polyline points="19 12 12 19 5 12"/></svg>
+                </span>
+              </th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="td-name">Membresía Premium</td>
+              <td class="td-price">MX$299.00</td>
+              <td><span class="badge badge-visible"><span class="badge-dot"></span>Visible</span></td>
+              <td><span style="color:#6B7280;font-size:13px;">🌐 Sin descubrir</span></td>
+              <td><span class="conversion">11.1% <small>últ. 7d</small></span></td>
+              <td class="td-muted">$0.00</td>
+              <td style="font-weight:600;color:#3D1F8F;">3</td>
+              <td>
+                <div class="td-actions">
+                  <button class="icon-btn" title="Copiar enlace" onclick="showToast('Enlace copiado al portapapeles')">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71"/></svg>
+                  </button>
+                  <button class="icon-btn" title="Más opciones">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="5" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="12" cy="19" r="1"/></svg>
+                  </button>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td class="td-name">Curso de Finanzas</td>
+              <td class="td-price">MX$799.00</td>
+              <td><span class="badge badge-visible"><span class="badge-dot"></span>Visible</span></td>
+              <td><span style="color:#6B7280;font-size:13px;">🌐 Sin descubrir</span></td>
+              <td><span class="conversion">—</span></td>
+              <td class="td-muted">$0.00</td>
+              <td style="font-weight:600;color:#3D1F8F;">0</td>
+              <td>
+                <div class="td-actions">
+                  <button class="icon-btn" onclick="showToast('Enlace copiado al portapapeles')">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71"/></svg>
+                  </button>
+                  <button class="icon-btn">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="5" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="12" cy="19" r="1"/></svg>
+                  </button>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td class="td-name">Asesoría 1:1</td>
+              <td class="td-price">—</td>
+              <td><span class="badge badge-hidden"><span class="badge-dot"></span>Oculto</span></td>
+              <td><span style="color:#6B7280;font-size:13px;">🌐 Sin descubrir</span></td>
+              <td><span class="conversion">—</span></td>
+              <td class="td-muted">$0.00</td>
+              <td style="font-weight:600;color:#9CA3AF;">0</td>
+              <td>
+                <div class="td-actions">
+                  <button class="icon-btn" onclick="showToast('Enlace copiado al portapapeles')">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71"/></svg>
+                  </button>
+                  <button class="icon-btn">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="5" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="12" cy="19" r="1"/></svg>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="table-footer">
+          <span>Mostrando 1 a 3 de 3</span>
+          <div style="display:flex;align-items:center;gap:8px;">
+            <button class="icon-btn" style="width:28px;height:28px;">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:13px;height:13px;"><polyline points="15 18 9 12 15 6"/><polyline points="9 18 3 12 9 6"/></svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── LIGAS DE PAGO TAB ── -->
+    <div id="tab-ligas" style="display:none;">
+
+      <div class="table-toolbar">
+        <div class="toolbar-left">
+          <div class="filter-chip">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+            Visibilidad
+            <span class="chip-value">Visible, Oculta</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+          </div>
+          <div class="filter-chip">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+            Producto
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+          </div>
+        </div>
+        <button class="btn btn-primary" onclick="openPanel()">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:13px;height:13px;"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          Crear liga de pago
+        </button>
+      </div>
+
+      <div class="table-card">
+        <table>
+          <thead>
+            <tr>
+              <th>Nombre</th>
+              <th>Producto</th>
+              <th>Precio
+                <span class="sort-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:12px;height:12px;"><line x1="12" y1="5" x2="12" y2="19"/><polyline points="19 12 12 19 5 12"/></svg>
+                </span>
+              </th>
+              <th>Ventas totales
+                <span class="sort-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:12px;height:12px;"><line x1="12" y1="5" x2="12" y2="19"/><polyline points="19 12 12 19 5 12"/></svg>
+                </span>
+              </th>
+              <th>Usuarios activos
+                <span class="sort-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:12px;height:12px;"><line x1="12" y1="5" x2="12" y2="19"/><polyline points="19 12 12 19 5 12"/></svg>
+                </span>
+              </th>
+              <th>Visibilidad</th>
+              <th>Método de cobro</th>
+              <th>Stock</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                <div class="td-name">Liga Membresía Premium</div>
+                <div style="font-size:11.5px;color:#9CA3AF;margin-top:2px;">Creada hace 25 min</div>
+              </td>
+              <td class="td-muted">Membresía Premium</td>
+              <td class="td-price">MX$299.00</td>
+              <td class="td-muted">MX$0.00</td>
+              <td style="font-weight:600;color:#3D1F8F;">0</td>
+              <td><span class="badge badge-visible"><span class="badge-dot"></span>Visible</span></td>
+              <td><span class="badge" style="background:#EEF2FF;color:#3D1F8F;">Comprar ahora</span></td>
+              <td class="td-muted">Ilimitado</td>
+              <td>
+                <div class="td-actions">
+                  <button class="icon-btn" onclick="showToast('Enlace copiado al portapapeles')">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71"/></svg>
+                  </button>
+                  <button class="icon-btn">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="5" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="12" cy="19" r="1"/></svg>
+                  </button>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <div class="td-name">Nombre de liga</div>
+                <div style="font-size:11.5px;color:#9CA3AF;margin-top:2px;">Creada hace 1h</div>
+              </td>
+              <td class="td-muted">Curso de Finanzas</td>
+              <td class="td-price">MX$250.00</td>
+              <td class="td-muted">MX$0.00</td>
+              <td style="font-weight:600;color:#9CA3AF;">0</td>
+              <td><span class="badge badge-hidden"><span class="badge-dot"></span>Oculta</span></td>
+              <td><span class="badge" style="background:#EEF2FF;color:#3D1F8F;">Comprar ahora</span></td>
+              <td class="td-muted">Ilimitado</td>
+              <td>
+                <div class="td-actions">
+                  <button class="icon-btn" onclick="showToast('Enlace copiado al portapapeles')">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71"/></svg>
+                  </button>
+                  <button class="icon-btn">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="5" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="12" cy="19" r="1"/></svg>
+                  </button>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <div class="td-name">Nombre de liga</div>
+                <div style="font-size:11.5px;color:#9CA3AF;margin-top:2px;">Creada hace 1h</div>
+              </td>
+              <td class="td-muted">—</td>
+              <td class="td-price">Gratis</td>
+              <td class="td-muted">$0.00</td>
+              <td style="font-weight:600;color:#3D1F8F;">1</td>
+              <td><span class="badge badge-hidden"><span class="badge-dot"></span>Oculta</span></td>
+              <td><span class="badge" style="background:#EEF2FF;color:#3D1F8F;">Comprar ahora</span></td>
+              <td class="td-muted">Ilimitado</td>
+              <td>
+                <div class="td-actions">
+                  <button class="icon-btn" onclick="showToast('Enlace copiado al portapapeles')">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71"/></svg>
+                  </button>
+                  <button class="icon-btn">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="5" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="12" cy="19" r="1"/></svg>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="table-footer">
+          <span>Mostrando 1 a 3 de 3</span>
+          <div style="display:flex;align-items:center;gap:8px;">
+            <button class="icon-btn" style="width:28px;height:28px;">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:13px;height:13px;"><polyline points="15 18 9 12 15 6"/><polyline points="9 18 3 12 9 6"/></svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<!-- ══════════════════════ CREATE PANEL ══════════════════════ -->
+<div class="overlay" id="overlay" onclick="closePanel()"></div>
+
+<div class="create-panel" id="createPanel">
+
+  <!-- Panel topbar -->
+  <div class="panel-topbar">
+    <button class="close-btn" onclick="closePanel()">✕</button>
+    <div class="panel-topbar-title">
+      <span>Ligas de pago</span>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:14px;height:14px;"><polyline points="9 18 15 12 9 6"/></svg>
+      <span style="color:#1A1A2E;font-weight:600;">Crear liga de pago</span>
+    </div>
+  </div>
+
+  <!-- LEFT: Form -->
+  <div class="panel-left">
+    <div class="panel-form">
+
+      <!-- Producto -->
+      <div class="form-section">
+        <label class="form-label">Producto</label>
+        <select class="form-select" id="prodSelect" onchange="updatePreview()">
+          <option value="">Seleccionar producto...</option>
+          <option value="Membresía Premium">Membresía Premium</option>
+          <option value="Curso de Finanzas">Curso de Finanzas</option>
+          <option value="Asesoría 1:1">Asesoría 1:1</option>
+        </select>
+      </div>
+
+      <!-- Nombre de la liga -->
+      <div class="form-section">
+        <label class="form-label">Nombre de la liga</label>
+        <input class="form-input" type="text" id="ligaName" placeholder="Ej. Liga Black Friday..." oninput="updatePreview()" />
+      </div>
+
+      <!-- Descripción -->
+      <div class="form-section">
+        <label class="form-label">Descripción</label>
+        <textarea class="form-textarea" id="descInput" placeholder="Esta descripción se muestra al cliente antes de pagar..." maxlength="1000" oninput="updateCharCount(this); updatePreview()"></textarea>
+        <div class="char-count"><span id="charCount">0</span> / 1000</div>
+      </div>
+
+      <!-- Precio -->
+      <div class="form-section">
+        <label class="form-label">Precio</label>
+        <div class="price-toggle">
+          <div class="price-option active" onclick="setPriceType('free', this)">Gratis</div>
+          <div class="price-option" onclick="setPriceType('one', this)">Único</div>
+          <div class="price-option" onclick="setPriceType('rec', this)">Recurrente</div>
+        </div>
+
+        <div id="amountSection" style="display:none;">
+          <div class="amount-wrap">
+            <div class="amount-input-group">
+              <span class="amount-prefix">$</span>
+              <input type="number" id="amountInput" placeholder="0.00" oninput="updatePreview()" />
+            </div>
+            <select class="currency-select" id="currencySelect" onchange="updatePreview()">
+              <option>MXN</option>
+              <option>USD</option>
+              <option>EUR</option>
+            </select>
+          </div>
+          <div class="quick-amounts">
+            <button class="quick-btn" onclick="setAmount(50)">$50</button>
+            <button class="quick-btn" onclick="setAmount(100)">$100</button>
+            <button class="quick-btn" onclick="setAmount(250)">$250</button>
+            <button class="quick-btn" onclick="setAmount(500)">$500</button>
+          </div>
+        </div>
+
+        <!-- Recurrente extra -->
+        <div id="recurringSection" style="display:none;margin-top:12px;">
+          <label class="form-label" style="font-size:12.5px;color:#6B7280;">Periodo de cobro</label>
+          <select class="form-select">
+            <option>Mensual</option>
+            <option>Quincenal</option>
+            <option>Anual</option>
+            <option>Semanal</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Opciones avanzadas -->
+      <div class="form-section">
+        <div class="toggle-row" style="padding-top:0;">
+          <div class="toggle-row-label">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 010 14.14M4.93 4.93a10 10 0 000 14.14"/></svg>
+            Opciones avanzadas
+          </div>
+          <button class="toggle" id="advToggle" onclick="this.classList.toggle('on'); document.getElementById('advOptions').style.display = this.classList.contains('on') ? 'block' : 'none'"></button>
+        </div>
+
+        <div id="advOptions" style="display:none;">
+          <div class="toggle-row">
+            <div class="toggle-row-label">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
+              Aceptar pagos en moneda local
+            </div>
+            <button class="toggle on"></button>
+          </div>
+          <div class="toggle-row">
+            <div class="toggle-row-label">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
+              Personalizar métodos de pago
+            </div>
+            <button class="toggle"></button>
+          </div>
+          <div class="toggle-row">
+            <div class="toggle-row-label">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 12V22H4V12"/><path d="M22 7H2v5h20V7z"/><path d="M12 22V7"/><path d="M12 7H7.5a2.5 2.5 0 010-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 000-5C13 2 12 7 12 7z"/></svg>
+              Código de descuento
+            </div>
+            <button class="toggle"></button>
+          </div>
+          <div class="toggle-row">
+            <div class="toggle-row-label">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+              Limitar stock
+            </div>
+            <button class="toggle"></button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- RIGHT: Preview -->
+  <div class="panel-right">
+    <div class="phone-frame">
+      <div class="phone-notch"></div>
+      <div class="phone-content">
+        <div class="preview-merchant">
+          <div class="merchant-avatar">V</div>
+          <span class="merchant-name">Velpay</span>
+        </div>
+        <p class="preview-desc" id="previewDesc">Descripción del producto</p>
+        <p class="preview-product-name" id="previewProduct">Nombre de liga</p>
+        <p class="preview-price" id="previewPrice">$0.00</p>
+        <button class="preview-promo">Agregar código de descuento</button>
+        <hr class="preview-divider"/>
+        <div class="preview-total-row">
+          <span>Total a pagar hoy</span>
+          <span id="previewTotal">$0.00</span>
+        </div>
+        <p class="preview-field-label">Email</p>
+        <input class="preview-input" placeholder="correo@ejemplo.com" readonly/>
+        <p class="preview-method-label">Método de pago</p>
+        <div class="preview-method">
+          <div class="preview-method-left">
+            <div class="preview-radio"><div class="preview-radio-inner"></div></div>
+            <span style="font-size:12.5px;">Tarjeta</span>
+          </div>
+          <div class="card-logos">
+            <div class="card-logo visa">VISA</div>
+            <div class="card-logo mc" style="font-size:7px;">MC</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="preview-device-toggle">
+      <button class="device-btn active" title="Móvil">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12" y2="18"/></svg>
+      </button>
+      <button class="device-btn" title="Escritorio">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Footer CTA -->
+  <div class="panel-footer">
+    <button class="btn btn-primary" onclick="createLink()">Crear liga de pago</button>
+  </div>
+
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast">
+  <span class="toast-icon">✓</span>
+  <span id="toastMsg">Liga creada exitosamente</span>
+</div>
+
+<script>
+  // ── TABS ──
+  function switchTab(name, el) {
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    el.classList.add('active');
+    document.getElementById('tab-productos').style.display = name === 'productos' ? 'block' : 'none';
+    document.getElementById('tab-ligas').style.display = name === 'ligas' ? 'block' : 'none';
+  }
+
+  // ── PANEL ──
+  function openPanel() {
+    document.getElementById('createPanel').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closePanel() {
+    document.getElementById('createPanel').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  // ── PRICE TYPE ──
+  let priceType = 'free';
+  function setPriceType(type, el) {
+    priceType = type;
+    document.querySelectorAll('.price-option').forEach(o => o.classList.remove('active'));
+    el.classList.add('active');
+    document.getElementById('amountSection').style.display = (type === 'one' || type === 'rec') ? 'block' : 'none';
+    document.getElementById('recurringSection').style.display = type === 'rec' ? 'block' : 'none';
+    updatePreview();
+  }
+
+  function setAmount(val) {
+    document.getElementById('amountInput').value = val;
+    updatePreview();
+  }
+
+  // ── CHAR COUNT ──
+  function updateCharCount(el) {
+    document.getElementById('charCount').textContent = el.value.length;
+  }
+
+  // ── PREVIEW ──
+  function updatePreview() {
+    const prod = document.getElementById('prodSelect').value || 'Nombre de liga';
+    const name = document.getElementById('ligaName').value || prod;
+    const desc = document.getElementById('descInput').value || 'Descripción del producto';
+    const currency = document.getElementById('currencySelect') ? document.getElementById('currencySelect').value : 'MXN';
+    let amount = '0.00';
+    let display = '$0.00';
+
+    if (priceType === 'free') {
+      display = 'Gratis';
+    } else {
+      const v = parseFloat(document.getElementById('amountInput').value) || 0;
+      amount = v.toFixed(2);
+      display = `$${amount}`;
+    }
+
+    document.getElementById('previewProduct').textContent = name;
+    document.getElementById('previewDesc').textContent = desc.slice(0, 60) + (desc.length > 60 ? '...' : '');
+    document.getElementById('previewPrice').textContent = display;
+    document.getElementById('previewTotal').textContent = display;
+  }
+
+  // ── CREATE LINK ──
+  function createLink() {
+    closePanel();
+    showToast('¡Liga de pago creada exitosamente!');
+  }
+
+  // ── TOAST ──
+  function showToast(msg) {
+    const t = document.getElementById('toast');
+    document.getElementById('toastMsg').textContent = msg;
+    t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), 3000);
+  }
+</script>
+</body>
+</html>
