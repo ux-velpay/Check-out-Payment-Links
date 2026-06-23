@@ -854,31 +854,120 @@ tbody td {
   height: 18px;
 }
 
-/* ── PHONE MOCKUP ── */
-.phone-frame {
-  width: 280px;
-  background: var(--white);
-  border-radius: 36px;
-  box-shadow: 0 20px 60px rgba(61, 31, 143, 0.25), 0 4px 12px rgba(0,0,0,0.1);
+/* ── iPHONE 14 PRO MOCKUP ── */
+.iphone-wrap {
+  position: relative;
+  width: 248px;
+  height: 506px;
+  flex-shrink: 0;
+}
+
+/* Cuerpo principal */
+.iphone-body {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(145deg, #2C2440 0%, #1A1330 40%, #211838 100%);
+  border-radius: 46px;
+  box-shadow:
+    inset 0 0 0 1px rgba(255,255,255,0.12),
+    inset 0 0 0 2px rgba(0,0,0,0.6),
+    0 0 0 1px #0D0A1A,
+    0 30px 80px rgba(0,0,0,0.55),
+    0 8px 24px rgba(0,0,0,0.4);
+}
+
+/* Pantalla */
+.iphone-screen {
+  position: absolute;
+  top: 7px;
+  left: 7px;
+  right: 7px;
+  bottom: 7px;
+  background: #ffffff;
+  border-radius: 40px;
   overflow: hidden;
-  border: 8px solid #1A1A2E;
-  position: relative;
 }
 
-.phone-notch {
-  width: 90px;
-  height: 22px;
-  background: #1A1A2E;
-  border-radius: 0 0 14px 14px;
-  margin: 0 auto;
-  position: relative;
-  z-index: 2;
+/* Dynamic Island */
+.dynamic-island {
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 88px;
+  height: 24px;
+  background: #000;
+  border-radius: 20px;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding-right: 7px;
+  box-shadow: 0 0 0 1.5px rgba(255,255,255,0.06);
 }
 
+.di-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: #0D0D12;
+  border: 1px solid #1A1A2E;
+  box-shadow: inset 0 0 3px rgba(100,160,255,0.3);
+}
+
+/* Botón silencio (izquierda, arriba) */
+.iphone-btn-mute {
+  position: absolute;
+  left: -3px;
+  top: 88px;
+  width: 3px;
+  height: 26px;
+  background: linear-gradient(to right, #1A1330, #2C2440);
+  border-radius: 2px 0 0 2px;
+  box-shadow: -1px 0 0 rgba(255,255,255,0.08);
+}
+
+/* Botones volumen (izquierda) */
+.iphone-btn-vol1 {
+  position: absolute;
+  left: -3px;
+  top: 130px;
+  width: 3px;
+  height: 52px;
+  background: linear-gradient(to right, #1A1330, #2C2440);
+  border-radius: 2px 0 0 2px;
+  box-shadow: -1px 0 0 rgba(255,255,255,0.08);
+}
+
+.iphone-btn-vol2 {
+  position: absolute;
+  left: -3px;
+  top: 194px;
+  width: 3px;
+  height: 52px;
+  background: linear-gradient(to right, #1A1330, #2C2440);
+  border-radius: 2px 0 0 2px;
+  box-shadow: -1px 0 0 rgba(255,255,255,0.08);
+}
+
+/* Botón power (derecha) */
+.iphone-btn-power {
+  position: absolute;
+  right: -3px;
+  top: 148px;
+  width: 3px;
+  height: 68px;
+  background: linear-gradient(to left, #1A1330, #2C2440);
+  border-radius: 0 2px 2px 0;
+  box-shadow: 1px 0 0 rgba(255,255,255,0.08);
+}
+
+/* Contenido scroll dentro de la pantalla */
 .phone-content {
-  padding: 16px;
+  padding: 50px 14px 16px;
   overflow-y: auto;
-  max-height: 520px;
+  height: 100%;
+  box-sizing: border-box;
 }
 
 .preview-merchant {
