@@ -37,7 +37,6 @@
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:14px;height:14px;"><polyline points="6 9 12 15 18 9"/></svg>
     </div>
     <a class="nav-item nav-sub" href="#">Transacciones</a>
-    <a class="nav-item nav-sub active" href="#">Ligas de pago</a>
 
     <a class="nav-item" href="#">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
@@ -55,6 +54,24 @@
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.24 12.24a6 6 0 00-8.49-8.49L5 10.5V19h8.5z"/><line x1="16" y1="8" x2="2" y2="22"/><line x1="17.5" y1="15" x2="9" y2="15"/></svg>
       Plugins
     </a>
+
+    <!-- Pinned -->
+    <div class="nav-group-label" style="margin-top:8px;">Anclados</div>
+
+    <a class="nav-item" href="#" onclick="switchMainTab('productos', this); return false;">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+      Productos
+    </a>
+    <a class="nav-item active" href="#" onclick="switchMainTab('ligas', this); return false;">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71"/></svg>
+      Ligas de pago
+    </a>
+    <a class="nav-item" href="#">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
+      Facturas
+    </a>
+
+    <div class="nav-group-label" style="margin-top:8px;">Herramientas</div>
 
     <div class="nav-item" style="justify-content:space-between;cursor:default;">
       <div style="display:flex;align-items:center;gap:10px;">
@@ -83,7 +100,7 @@
 
   <!-- TOPBAR -->
   <header class="topbar">
-    <div class="breadcrumb">Ventas/ <span>Ligas de pago</span></div>
+    <div class="breadcrumb">Anclados/ <span>Ligas de pago</span></div>
     <div class="topbar-right">
       <button class="btn btn-primary" onclick="openPanel()">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:14px;height:14px;"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
@@ -97,12 +114,12 @@
 
     <!-- TABS -->
     <div class="tabs">
-      <div class="tab active" onclick="switchTab('productos', this)">Productos</div>
-      <div class="tab" onclick="switchTab('ligas', this)">Ligas de pago</div>
+      <div class="tab" onclick="switchTab('productos', this)">Productos</div>
+      <div class="tab active" onclick="switchTab('ligas', this)">Ligas de pago</div>
     </div>
 
     <!-- ── PRODUCTOS TAB ── -->
-    <div id="tab-productos">
+    <div id="tab-productos" style="display:none;">
 
       <div class="table-toolbar">
         <div class="toolbar-left">
@@ -213,7 +230,7 @@
     </div>
 
     <!-- ── LIGAS DE PAGO TAB ── -->
-    <div id="tab-ligas" style="display:none;">
+    <div id="tab-ligas">
 
       <div class="table-toolbar">
         <div class="toolbar-left">
@@ -869,6 +886,33 @@
     el.classList.add('active');
     document.getElementById('tab-productos').style.display = name === 'productos' ? 'block' : 'none';
     document.getElementById('tab-ligas').style.display = name === 'ligas' ? 'block' : 'none';
+  }
+
+  function switchMainTab(name, sideEl) {
+    // sidebar active
+    document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+    sideEl.classList.add('active');
+    // sync tab bar
+    const tabEls = document.querySelectorAll('.tab');
+    tabEls.forEach(t => {
+      const isMatch = (name === 'productos' && t.textContent.trim() === 'Productos') ||
+                      (name === 'ligas' && t.textContent.trim() === 'Ligas de pago');
+      t.classList.toggle('active', isMatch);
+    });
+    document.getElementById('tab-productos').style.display = name === 'productos' ? 'block' : 'none';
+    document.getElementById('tab-ligas').style.display = name === 'ligas' ? 'block' : 'none';
+    // breadcrumb
+    const labels = { productos: 'Productos', ligas: 'Ligas de pago' };
+    document.querySelector('.breadcrumb').innerHTML = `Anclados/ <span>${labels[name]}</span>`;
+    // topbar button
+    const btn = document.querySelector('.topbar-right .btn-primary');
+    if (name === 'productos') {
+      btn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:14px;height:14px;"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg> Crear producto';
+      btn.onclick = openProductPanel;
+    } else {
+      btn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:14px;height:14px;"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg> Crear liga de pago';
+      btn.onclick = openPanel;
+    }
   }
 
   // ── PANEL ──
